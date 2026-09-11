@@ -21,4 +21,6 @@ public:
 
     void setTransformX(double x) { m_transformX = x; };
     void setTransformY(double y) { m_transformY = y; };
+
+    void setTransformXY(double x, double y) { m_transformX = x;  m_transformY = y; };
 };

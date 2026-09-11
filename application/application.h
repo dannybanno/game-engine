@@ -4,11 +4,17 @@
 #include <vector>
 
 #include "../scene/scene.h"
+#include "../input/input.h"
+#include "../window/window.h"
+
 
 class Application {
 private:
 	bool m_isRunning{ false };
 	Scene m_currentScene;
+	Input m_currentInput;
+
+	window m_window;
 
 public:
 
@@ -18,13 +24,15 @@ public:
 	Scene& getScene() { return m_currentScene; }
 	void setScene(Scene scene) { m_currentScene = std::move(scene); }
 
+	Input& getInputSys() { return m_currentInput; }
+	void setInputSys(Input input) { m_currentInput = std::move(input); }
+
 	void start();
 	void stop();
 	void update();
 
-	void processInput(std::string_view input);
-
-	std::string receiveInput();
-
+	window& getWindow() {
+		return m_window;
+	}
 
 };

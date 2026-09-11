@@ -5,6 +5,9 @@
 #include "application/application.h"
 
 int main() {
+   
     Application myGame;
     myGame.start();
+
+    
 }
