@@ -42,7 +42,7 @@ void Application::update() {
 	Scene& scene = getScene();
 	Input& input = getInputSys();
 
-	scene.getEntityByID(1).getTransform().setTransformXY(1, 1);
+	//scene.getEntityByID(1).getTransform().setTransformXY(1, 1);
 
 	// Update Delta Time
 	auto currentTime = clock::now();
@@ -51,7 +51,9 @@ void Application::update() {
 	
 	if (deltaTime > 0.05f) deltaTime = 0.05f;
 	
-	
+	Entity& entToUpdate = scene.getEntityByID(1);
+	entToUpdate.setVelocityX(1000);
+
 	//auto inputResult = input.getInput();
 	
 	//if (inputResult.action == Input::QUIT) {

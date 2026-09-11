@@ -20,6 +20,7 @@ private:
 	GLuint m_vbo;
 	GLuint m_vao;
 	GLuint m_shaderProgram;
+	GLuint m_entityPosLocation;
 
 public:
 
@@ -113,6 +114,9 @@ public:
 
 		glDeleteShader(vertexShader);
 		glDeleteShader(fragmentShader);
+
+		m_entityPosLocation = glGetUniformLocation(m_shaderProgram, "entityPos");
+
 	}
 
 	void render(const std::vector<Entity>& entityList){
@@ -124,7 +128,15 @@ public:
 
 		glBindVertexArray(m_vao);
 
-		glDrawArrays(GL_TRIANGLES, 0, 3);
+		for (const Entity& entity : entityList) {
+			double x = entity.getTransformX();
+			double y = entity.getTransformX();
+
+			glUniform2f(m_entityPosLocation, x, y);
+
+			glDrawArrays(GL_TRIANGLES, 0, 3);
+		}
+
 	}
 
 };
