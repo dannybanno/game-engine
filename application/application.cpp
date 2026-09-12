@@ -18,6 +18,7 @@ void Application::start() {
 	Application::setInputSys(input);
 
 	getScene().createEntity("Danny");
+	getScene().createEntity("Enemy");
 
 	Application::setAppState(true);
 
@@ -41,8 +42,6 @@ void Application::update() {
 	// ref to scene / input
 	Scene& scene = getScene();
 	Input& input = getInputSys();
-
-	//scene.getEntityByID(1).getTransform().setTransformXY(1, 1);
 
 	// Update Delta Time
 	auto currentTime = clock::now();

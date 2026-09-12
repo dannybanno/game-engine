@@ -4,7 +4,8 @@
 #include <string>
 
 #include "../transform/transform.h"
-
+#include "../mesh/mesh.h"
+#include "../render_mesh/render_mesh.h"
 
 
 class Entity {
@@ -18,6 +19,9 @@ private:
     int m_entityID;
 
     std::vector<double> velocity{1, 1};
+
+    Mesh m_mesh;
+    renderMesh m_renderMesh;
 
 public:
 
@@ -41,6 +45,23 @@ public:
     Transform& getTransform() {
         return m_entTransform;
     }
+
+    Mesh& getMesh() {
+        return m_mesh;
+    }
+
+    [[nodiscard]] const Mesh& getMesh() const{
+        return m_mesh;
+    }
+
+    renderMesh& getRenderMesh() {
+        return m_renderMesh;
+    }
+
+    [[nodiscard]] const renderMesh& getRenderMesh() const{
+        return m_renderMesh;
+    }
+
 
     static bool exists() {
         return instance != nullptr;

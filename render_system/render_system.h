@@ -10,44 +10,20 @@ class renderSystem {
 private:
 	std::array<std::pair<float, float>, 3> m_vertices{
 		{
-			{-0.5f, -0.5f}, 
-			{ 0.5f, -0.5f}, 
-			{ 0.0f,  0.5f}  
+			{-0.5f, -0.5f},
+			{ 0.5f, -0.5f},
+			{ 0.0f,  0.5f}
 		}
 	};
 
-
-	GLuint m_vbo;
-	GLuint m_vao;
-	GLuint m_shaderProgram;
-	GLuint m_entityPosLocation;
+	GLuint m_shaderProgram{};
+	GLuint m_entityPosLocation{};
 
 public:
 
 	void init() {
 
-		glGenVertexArrays(1, &m_vao);
-		glGenBuffers(1, &m_vbo);
 
-		glBindVertexArray(m_vao);
-		glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
-
-		glBufferData(
-			GL_ARRAY_BUFFER,
-			sizeof(m_vertices),
-			m_vertices.data(),
-			GL_STATIC_DRAW
-		);
-
-		glVertexAttribPointer(
-			0, // index -> location = 0. 
-			2, // 2 components -> x, y
-			GL_FLOAT, // component type
-			GL_FALSE, // normalise?
-			2 * sizeof(float), // bytes from pos to next
-			(void*)0
-		);
-		glEnableVertexAttribArray(0);
 
 		std::ifstream file("../shaders/triangle.vert");
 
@@ -126,11 +102,14 @@ public:
 
 		glUseProgram(m_shaderProgram);
 
-		glBindVertexArray(m_vao);
+		for (const auto& entity : entityList) {
 
-		for (const Entity& entity : entityList) {
 			double x = entity.getTransformX();
 			double y = entity.getTransformX();
+
+			const renderMesh& renderMesh = entity.getRenderMesh();
+
+			glBindVertexArray(renderMesh.getVAO());
 
 			glUniform2f(m_entityPosLocation, x, y);
 

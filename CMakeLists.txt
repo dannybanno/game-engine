@@ -44,6 +44,9 @@ add_executable(ECSProj
     movement_system/movement_system.cpp
     render_system/render_system.cpp
     window/window.cpp
+        mesh/mesh.cpp
+        mesh/mesh.h
+        render_mesh/render_mesh.h
 )
 
 

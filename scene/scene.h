@@ -34,6 +34,9 @@ public:
 	void createEntity(std::string_view name) {
 		Entity entity{name};
 		m_currentEntities.push_back(entity);
+
+		Entity& newEntity = m_currentEntities.back();
+		newEntity.getRenderMesh().create(newEntity.getMesh());
 	}
 
 	void removeEntityByID(int id) {
