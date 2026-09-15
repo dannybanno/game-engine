@@ -10,6 +10,7 @@ class renderMesh {
 private:
     GLuint m_vao{};
     GLuint m_vbo{};
+    GLsizei m_vertexCount{};
 
 public:
     GLuint getVAO() const{
@@ -18,6 +19,10 @@ public:
 
     GLuint& getVBO() {
         return m_vbo;
+    }
+
+    GLsizei getVertexCount() const {
+        return m_vertexCount;
     }
 
     void create(const Mesh& mesh) {
@@ -42,6 +47,9 @@ public:
             2 * sizeof(float), // bytes from pos to next
             (void*)0
         );
+
+        m_vertexCount = static_cast<GLsizei>(mesh.getVertices().size() / 2);
+
         glEnableVertexAttribArray(0);
     }
 

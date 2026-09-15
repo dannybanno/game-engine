@@ -8,14 +8,6 @@
 class renderSystem {
 
 private:
-	std::array<std::pair<float, float>, 3> m_vertices{
-		{
-			{-0.5f, -0.5f},
-			{ 0.5f, -0.5f},
-			{ 0.0f,  0.5f}
-		}
-	};
-
 	GLuint m_shaderProgram{};
 	GLuint m_entityPosLocation{};
 
@@ -95,7 +87,7 @@ public:
 
 	}
 
-	void render(const std::vector<Entity>& entityList){
+	void render(const std::vector<Entity>& entityList, meshManager& meshManager){
 
 		glClearColor(0, 0, 0, 1);
 		glClear(GL_COLOR_BUFFER_BIT);
@@ -107,13 +99,13 @@ public:
 			double x = entity.getTransformX();
 			double y = entity.getTransformX();
 
-			const renderMesh& renderMesh = entity.getRenderMesh();
+			const renderMesh& renderMesh = meshManager.getRenderMesh(entity.getMeshID());
 
 			glBindVertexArray(renderMesh.getVAO());
 
 			glUniform2f(m_entityPosLocation, x, y);
 
-			glDrawArrays(GL_TRIANGLES, 0, 3);
+			glDrawArrays(GL_TRIANGLES, 0, renderMesh.getVertexCount());
 		}
 
 	}

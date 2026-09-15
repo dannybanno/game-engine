@@ -47,6 +47,12 @@ add_executable(ECSProj
         mesh/mesh.cpp
         mesh/mesh.h
         render_mesh/render_mesh.h
+        mesh_manager/mesh_manager.cpp
+        mesh_manager/mesh_manager.h
+        mesh_resource/mesh_resource.cpp
+        mesh_resource/mesh_resource.h
+        resource_manager/resource_manager.cpp
+        resource_manager/resource_manager.h
 )
 
 

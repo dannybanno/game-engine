@@ -5,20 +5,17 @@
 #ifndef ECSPROJ_MESH_H
 #define ECSPROJ_MESH_H
 #include <array>
+#include <vector>
 
 
 class Mesh {
 private:
-    std::array<float, 6> m_vertices{
-        {
-            -0.5f, -0.5f,
-             0.5f, -0.5f,
-             0.0f,  0.5f
-        }
-    };
+    std::vector<float> m_vertices{};
 public:
 
-    const std::array<float, 6>& getVertices() const{
+    Mesh(std::vector<float>& vertices) : m_vertices(vertices) {};
+
+    const std::vector<float>& getVertices() const{
         return m_vertices;
     }
 };

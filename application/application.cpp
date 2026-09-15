@@ -17,8 +17,16 @@ void Application::start() {
 	Input input;
 	Application::setInputSys(input);
 
-	getScene().createEntity("Danny");
-	getScene().createEntity("Enemy");
+	std::vector<float> triVerts{
+		-0.5f, -0.5f,
+		0.5f, -0.5f,
+		0.0f, 0.5f
+	};
+
+	Mesh triMesh(triVerts);
+
+	getScene().createEntity("Danny", 0);
+	getScene().createEntity("Enemy", 1);
 
 	Application::setAppState(true);
 

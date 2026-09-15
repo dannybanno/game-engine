@@ -5,6 +5,7 @@
 
 #include "../transform/transform.h"
 #include "../mesh/mesh.h"
+#include "../mesh_manager/mesh_manager.h"
 #include "../render_mesh/render_mesh.h"
 
 
@@ -20,15 +21,15 @@ private:
 
     std::vector<double> velocity{1, 1};
 
-    Mesh m_mesh;
-    renderMesh m_renderMesh;
+    int m_meshID{};
 
 public:
 
-    Entity(std::string_view entName) :
+    Entity(std::string_view entName, int meshID) :
         m_entTransform{ 0, 0 },
         m_entityID{ s_idGenerator++ },
-        m_entityName{ entName }
+        m_entityName{ entName },
+        m_meshID{meshID}
     {
         instance = this;
     };
@@ -46,23 +47,6 @@ public:
         return m_entTransform;
     }
 
-    Mesh& getMesh() {
-        return m_mesh;
-    }
-
-    [[nodiscard]] const Mesh& getMesh() const{
-        return m_mesh;
-    }
-
-    renderMesh& getRenderMesh() {
-        return m_renderMesh;
-    }
-
-    [[nodiscard]] const renderMesh& getRenderMesh() const{
-        return m_renderMesh;
-    }
-
-
     static bool exists() {
         return instance != nullptr;
     }
@@ -79,6 +63,8 @@ public:
         return m_entityName;
     }
 
+    int getMeshID() const {return m_meshID;}
+    void setMeshID(int meshID) {m_meshID = meshID;}
 
     // Accessing Transform - get / set through entity
     void setPosition(double x, double y) {

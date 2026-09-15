@@ -14,6 +14,7 @@ private:
 	std::vector<Entity> m_currentEntities;
 	movementSystem m_movementSystem;
 	renderSystem m_renderSystem;
+	meshManager m_meshManager;
 
 public:
 
@@ -28,16 +29,15 @@ public:
 	}
 
 	void Render() {
-		m_renderSystem.render(m_currentEntities);
+		m_renderSystem.render(m_currentEntities, m_meshManager);
 	}
 
-	void createEntity(std::string_view name) {
-		Entity entity{name};
+	void createEntity(std::string_view name, int meshID) {
+		Entity entity{name, meshID};
 		m_currentEntities.push_back(entity);
-
-		Entity& newEntity = m_currentEntities.back();
-		newEntity.getRenderMesh().create(newEntity.getMesh());
 	}
+
+	meshManager& getMeshManager() {return m_meshManager;}
 
 	void removeEntityByID(int id) {
 		auto it = std::find_if(m_currentEntities.begin(), m_currentEntities.end(),
