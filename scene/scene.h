@@ -16,6 +16,8 @@ private:
 	renderSystem m_renderSystem;
 	meshManager m_meshManager;
 
+	int m_nextMeshID = 0;
+
 public:
 
 	Scene() = default;
@@ -35,6 +37,14 @@ public:
 	void createEntity(std::string_view name, int meshID) {
 		Entity entity{name, meshID};
 		m_currentEntities.push_back(entity);
+	}
+
+	int addMesh(const Mesh& mesh) {
+		int id = m_nextMeshID++;
+
+		m_meshManager.addMesh(id, mesh);
+
+		return id;
 	}
 
 	meshManager& getMeshManager() {return m_meshManager;}

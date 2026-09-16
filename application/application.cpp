@@ -23,10 +23,11 @@ void Application::start() {
 		0.0f, 0.5f
 	};
 
-	Mesh triMesh(triVerts);
+	const Mesh triMesh(triVerts);
+	int triangleID = getScene().addMesh(triMesh);
 
-	getScene().createEntity("Danny", 0);
-	getScene().createEntity("Enemy", 1);
+	getScene().createEntity("Danny", triangleID);
+	getScene().createEntity("Enemy", triangleID);
 
 	Application::setAppState(true);
 

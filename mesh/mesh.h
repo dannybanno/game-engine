@@ -13,7 +13,7 @@ private:
     std::vector<float> m_vertices{};
 public:
 
-    Mesh(std::vector<float>& vertices) : m_vertices(vertices) {};
+    Mesh(const std::vector<float>& vertices) : m_vertices(vertices) {};
 
     const std::vector<float>& getVertices() const{
         return m_vertices;

@@ -16,7 +16,14 @@ private:
     renderMesh m_renderMesh;
 public:
 
-    meshResource(Mesh& mesh, renderMesh& renderMesh) : m_mesh(mesh), m_renderMesh(renderMesh) {}
+    meshResource(const Mesh& mesh) : m_mesh(mesh) {m_renderMesh.create(m_mesh);}
+
+    // Prevents Copying
+    meshResource(const meshResource&) = delete;
+    meshResource& operator=(const meshResource&) = delete;
+
+    meshResource(meshResource&&) noexcept = delete;
+    meshResource& operator=(meshResource&&) noexcept = default;
 
     Mesh& getMesh() { return m_mesh; }
     renderMesh& getRenderMesh() { return m_renderMesh; }

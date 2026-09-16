@@ -13,6 +13,29 @@ private:
     GLsizei m_vertexCount{};
 
 public:
+
+    renderMesh() = default;
+
+    // prevent copying
+
+    renderMesh(const renderMesh&) = delete;
+    renderMesh& operator=(const renderMesh&) = delete;
+
+    renderMesh(renderMesh&& other) noexcept :
+        m_vao(other.m_vao),
+        m_vbo(other.m_vbo),
+        m_vertexCount(other.m_vertexCount)
+        {
+            other.m_vao = 0;
+            other.m_vbo = 0;
+            m_vertexCount = 0;
+        }
+
+    ~renderMesh() {
+        glDeleteVertexArrays(1, &m_vao);
+        glDeleteBuffers(1, &m_vbo);
+    }
+
     GLuint getVAO() const{
         return m_vao;
     }

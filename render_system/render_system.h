@@ -97,7 +97,7 @@ public:
 		for (const auto& entity : entityList) {
 
 			double x = entity.getTransformX();
-			double y = entity.getTransformX();
+			double y = entity.getTransformY();
 
 			const renderMesh& renderMesh = meshManager.getRenderMesh(entity.getMeshID());
 
