@@ -32,8 +32,10 @@ public:
         }
 
     ~renderMesh() {
-        glDeleteVertexArrays(1, &m_vao);
-        glDeleteBuffers(1, &m_vbo);
+        if (m_vao != 0)
+            glDeleteVertexArrays(1, &m_vao);
+        if (m_vbo != 0)
+            glDeleteBuffers(1, &m_vbo);
     }
 
     GLuint getVAO() const{

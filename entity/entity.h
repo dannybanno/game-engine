@@ -19,7 +19,7 @@ private:
     static inline int s_idGenerator {1};
     int m_entityID;
 
-    std::vector<double> velocity{1, 1};
+    std::vector<double> velocity{0, 0};
 
     int m_meshID{};
 
@@ -47,6 +47,10 @@ public:
         return m_entTransform;
     }
 
+    const Transform& getTransform() const {
+        return m_entTransform;
+    }
+
     static bool exists() {
         return instance != nullptr;
     }
@@ -65,17 +69,6 @@ public:
 
     int getMeshID() const {return m_meshID;}
     void setMeshID(int meshID) {m_meshID = meshID;}
-
-    // Accessing Transform - get / set through entity
-    void setPosition(double x, double y) {
-        m_entTransform.setTransformX(x);
-        m_entTransform.setTransformY(y);
-    }
-    void setPosX(double x) { m_entTransform.setTransformX(x); }
-    void setPosY(double y) { m_entTransform.setTransformY(y); }
-
-    [[nodiscard]] double getTransformX() const { return m_entTransform.getTransformX(); };
-    [[nodiscard]] double getTransformY() const { return m_entTransform.getTransformY(); };
 
     // Velocity
     [[nodiscard]] std::vector<double>& getVelocity() { return velocity; }

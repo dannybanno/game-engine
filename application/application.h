@@ -1,4 +1,5 @@
 #pragma once
+#include <chrono>
 #include <string>
 #include <utility>
 #include <vector>
@@ -15,6 +16,8 @@ private:
 	Input m_currentInput;
 
 	window m_window;
+
+	std::chrono::time_point<std::chrono::steady_clock> m_lastTime{};
 
 public:
 

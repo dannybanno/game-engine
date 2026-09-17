@@ -12,6 +12,9 @@ void Application::start() {
 		std::cout << "Couldnt create window" << std::endl;
 	}
 
+	using clock = std::chrono::steady_clock;
+	m_lastTime = clock::now();
+
 	getScene().init();
 
 	Input input;
@@ -23,10 +26,20 @@ void Application::start() {
 		0.0f, 0.5f
 	};
 
+	std::vector<float> recVerts {
+		-0.5f,  0.5f,  // top-left
+		 0.5f,  0.5f,  // top-right
+		 0.5f, -0.5f,  // bottom-right
+		-0.5f, -0.5f
+	};
+
 	const Mesh triMesh(triVerts);
 	int triangleID = getScene().addMesh(triMesh);
 
-	getScene().createEntity("Danny", triangleID);
+	const Mesh recMesh(recVerts);
+	int redID = getScene().addMesh(recMesh);
+
+	getScene().createEntity("Danny", redID);
 	getScene().createEntity("Enemy", triangleID);
 
 	Application::setAppState(true);
@@ -45,7 +58,7 @@ void Application::update() {
 	// Delta Time
 	using clock = std::chrono::steady_clock;
 
-	auto lastTime = clock::now();
+
 
 
 	// ref to scene / input
@@ -54,13 +67,13 @@ void Application::update() {
 
 	// Update Delta Time
 	auto currentTime = clock::now();
-	float deltaTime = std::chrono::duration<float>(currentTime - lastTime).count();
-	lastTime = currentTime;
+	float deltaTime = std::chrono::duration<float>(currentTime - m_lastTime).count();
+	m_lastTime = currentTime;
 	
 	if (deltaTime > 0.05f) deltaTime = 0.05f;
 	
 	Entity& entToUpdate = scene.getEntityByID(1);
-	entToUpdate.setVelocityX(1000);
+	entToUpdate.setVelocityX(1);
 
 	//auto inputResult = input.getInput();
 	

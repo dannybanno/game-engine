@@ -11,6 +11,8 @@ private:
 	GLuint m_shaderProgram{};
 	GLuint m_entityPosLocation{};
 
+	meshManager m_meshManager;
+
 public:
 
 	void init() {
@@ -96,8 +98,8 @@ public:
 
 		for (const auto& entity : entityList) {
 
-			double x = entity.getTransformX();
-			double y = entity.getTransformY();
+			double x = entity.getTransform().getTransformX();
+			double y = entity.getTransform().getTransformY();
 
 			const renderMesh& renderMesh = meshManager.getRenderMesh(entity.getMeshID());
 
