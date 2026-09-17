@@ -62,8 +62,8 @@ public:
 	Entity& getEntityByID(int id) {
 		for (auto &ent : m_currentEntities) {
 			if (ent.getEntityID() == id) { return ent; }
+			else{throw std::out_of_range("Entity Not found with ID:" + std::to_string(id));}
 		}
-		std::cout << "Entity Not Found with ID: " << id << std::endl;
 	}
 
 };

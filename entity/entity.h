@@ -19,7 +19,7 @@ private:
     static inline int s_idGenerator {1};
     int m_entityID;
 
-    std::vector<double> velocity{0, 0};
+    std::array<double, 2> velocity{0, 0};
 
     int m_meshID{};
 
@@ -71,7 +71,7 @@ public:
     void setMeshID(int meshID) {m_meshID = meshID;}
 
     // Velocity
-    [[nodiscard]] std::vector<double>& getVelocity() { return velocity; }
+    [[nodiscard]] std::array<double, 2> getVelocity() { return velocity; }
     void setVelocityX(double x) { velocity[0] = x; }
     void setVelocityY(double y) { velocity[1] = y; }
 
